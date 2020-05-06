@@ -16,7 +16,6 @@ from serial.tools import hexlify_codec
 # trent's notes
 # change line 827 to display user input text
 first = 0
-eof = 0
 end = ''
 count = 0
 codecs.register(lambda c: hexlify_codec.getregentry() if c == 'hexlify' else None)
@@ -453,7 +452,6 @@ class Miniterm(object):
                         text = self.rx_decoder.decode(data)
                         for transformation in self.rx_transformations:
                             text = transformation.rx(text)
-                        #start test
                         f = open("response_mirobot.txt", "a")
                         
                         
@@ -466,12 +464,7 @@ class Miniterm(object):
                             input1.truncate()
                             input1.write('^')
                             input1.close()
-                        #open and read the file after the appending:
-                        # f = open("demofile2.txt", "r")
-                        # print(f.read())
-                        
-                        #end test
-                        #self.console.write(text)
+
         except serial.SerialException:
             self.alive = False
             self.console.cancel()
@@ -513,22 +506,13 @@ class Miniterm(object):
                             input1.close()
                         count = count + 1
                         try:
-                            # c = self.console.getkey()# use to get keyboard input
+                            
                             global first
                             global eof
                             if first == 0:
                                 time.sleep(2)
                                 first = 1
-                            
-                            # c = self.console.getkey()
-                            # if eof == 0:
-                                # c = self.console.getkey()
-                                # #c = input1.read(1)# replace with readlines
-                            # if c == '@':
-                                # eof = 1
-                            # if eof == 1:
-                                # c = self.console.getkey()
-                               
+                                 
                             if not c:
                                 break
                         except KeyboardInterrupt:
