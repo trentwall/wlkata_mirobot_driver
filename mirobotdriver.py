@@ -18,6 +18,7 @@ from serial.tools import hexlify_codec
 first = 0
 end = ''
 count = 0
+idle_count = 0
 codecs.register(lambda c: hexlify_codec.getregentry() if c == 'hexlify' else None)
 
 try:
@@ -458,12 +459,20 @@ class Miniterm(object):
                         f.write(text)
                         f.close()
                         self.console.write(text)
-
-                        if "ok" in text:
+                        # check for robot in idle state 
+                        # then write save to write next command 
+                        # char to response_mirobot file
+                        if "Idle" in text:
                             input1 = open("input.txt", "r+")
                             input1.truncate()
                             input1.write('^')
                             input1.close()
+                        # if "ok" in text:
+                            # # add check if idle
+                            # input1 = open("input.txt", "r+")
+                            # input1.truncate()
+                            # input1.write('^')
+                            # input1.close()
 
         except serial.SerialException:
             self.alive = False
@@ -477,6 +486,7 @@ class Miniterm(object):
         locally.
         """
         global count
+        global idle_count
         menu_active = False
         try:
 
@@ -490,8 +500,25 @@ class Miniterm(object):
                         print("^")
                     else:
                         print('"')
-                    c = True
-                    count = 0
+                        count = 0
+                    
+                        # check if robot is ready for next command
+                        check_idle = "?\n"
+                        text = check_idle[idle_count]                    
+                        for transformation in self.tx_transformations:
+                            text = transformation.tx(text)
+                        self.serial.write(self.tx_encoder.encode(text))
+                        if self.echo:
+                            echo_text = c
+                            for transformation in self.tx_transformations:
+                                echo_text = transformation.echo(echo_text)
+                            self.console.write(echo_text)
+                        
+                        #send other half of check state command
+                        if idle_count == 0:
+                            idle_count = 1
+                        else:
+                            idle_count = 0                   
                 else:
                     input1 = open("input.txt","r")
                     data = input1.readlines()
