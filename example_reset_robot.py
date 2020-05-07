@@ -13,11 +13,3 @@ while i < 5:
     data = response.readlines()
     response.close()
     length = len(data)
-    if length > 0:
-        while 1:
-            if "ok" in data[length - 2]:
-                break
-            response = open("response_mirobot.txt", "r")
-            data = response.readlines()
-            response.close()
-            length = len(data)        
