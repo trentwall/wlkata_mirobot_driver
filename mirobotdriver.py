@@ -453,6 +453,7 @@ class Miniterm(object):
                         text = self.rx_decoder.decode(data)
                         for transformation in self.rx_transformations:
                             text = transformation.rx(text)
+
                         f = open("response_mirobot.txt", "a")
                         
                         
@@ -467,13 +468,7 @@ class Miniterm(object):
                             input1.truncate()
                             input1.write('^')
                             input1.close()
-                        # if "ok" in text:
-                            # # add check if idle
-                            # input1 = open("input.txt", "r+")
-                            # input1.truncate()
-                            # input1.write('^')
-                            # input1.close()
-
+                            
         except serial.SerialException:
             self.alive = False
             self.console.cancel()
@@ -533,13 +528,11 @@ class Miniterm(object):
                             input1.close()
                         count = count + 1
                         try:
-                            
                             global first
-                            global eof
                             if first == 0:
                                 time.sleep(2)
                                 first = 1
-                                 
+
                             if not c:
                                 break
                         except KeyboardInterrupt:
@@ -557,7 +550,6 @@ class Miniterm(object):
                         else:
                             #~ if self.raw:
                             text = c
-                            #print(text)
                             for transformation in self.tx_transformations:
                                 text = transformation.tx(text)
                             self.serial.write(self.tx_encoder.encode(text))
