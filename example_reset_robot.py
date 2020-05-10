@@ -13,5 +13,3 @@ while i < 5:
     data = response.readlines()
     response.close()
     length = len(data)
-       
-
