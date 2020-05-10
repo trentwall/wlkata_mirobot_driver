@@ -1,7 +1,0 @@
-):212.000,10.029,190.991,0.015,4.987,0.007,Pump PWM:0,Valve PWM:0,Motion_MODE:1>
-ok
-ok
-<Idle,Angle(ABCDXYZ):0.250,8.641,-2.700,0.000,2.679,7.465,-11.125,Cartesian coordinate(XYZ RxRyRz):212.000,10.029,190.991,0.015,4.987,0.007,Pump PWM:0,Valve PWM:0,Motion_MODE:1>
-ok
-ok
-<Idle,Angle(ABCDXYZ):0.250,8.641,-2.700,0.000,2.679,7.465,-11.125,Cartesian coordinate(XYZ RxRyRz):212.000,10.029,190.991,0.015,4.987,0.007,Pump PWM:0,Valve PWM:0,Motion_MODE:1>
