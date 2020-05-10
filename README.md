@@ -4,7 +4,7 @@ This is a python code that interfaces with wlkata mirobot and text files. The pu
 To use: git clone this repo,
 ./mirobotdriver.py
 
-To send commands to the robot: modify the first line of the input.txt file. Be sure to add a newline at the end of the command.
+To send commands to the robot: check that the first char in the file is "^". Then, modify the first line of the input.txt file. Be sure to add a newline at the end of the command.
 
 The output from the mirobot is stored in mirobot_response.txt.
 
