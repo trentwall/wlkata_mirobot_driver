@@ -823,7 +823,9 @@ class Miniterm(object):
 # default args can be used to override when calling main() from an other script
 # e.g to create a miniterm-my-device.py
 # def main(default_port=None, default_baudrate=9600, default_rts=None, default_dtr=None):
-def main(default_port='COM5', default_baudrate=115200, default_rts=None, default_dtr=None):
+#def main(default_port='COM5', default_baudrate=115200, default_rts=None, default_dtr=None):
+def main(default_port=None, default_baudrate=115200, default_rts=None, default_dtr=None):
+
     """Command line tool, entry point"""
 
     import argparse
