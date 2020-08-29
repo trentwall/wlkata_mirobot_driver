@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 def check_state_cmd():
 #"""
@@ -14,7 +15,8 @@ def check_state_cmd():
             f = open("input.txt","r+")
             f.write(cmd)
             f.close()
-            x = 1  
+            x = 1
+    time.sleep(0.5)
     
 def amm_ab(axis1_angle, axis2_angle, axis3_angle, axis4_angle, axis5_angle, axis6_angle, speed = 1000):
 #"""
@@ -45,7 +47,7 @@ def amm_ab(axis1_angle, axis2_angle, axis3_angle, axis4_angle, axis5_angle, axis
             f.write(cmd)
             f.close()
             x = 1    
-
+    time.sleep(1)
     
 def amm_r(axis1_angle = 0, axis2_angle = 0,axis3_angle = 0, axis4_angle = 0, axis5_angle = 0, axis6_angle = 0, speed = 1000):
 #"""
@@ -63,7 +65,7 @@ def amm_r(axis1_angle = 0, axis2_angle = 0,axis3_angle = 0, axis4_angle = 0, axi
             f.write(cmd)
             f.close()
             x = 1
-    
+    time.sleep(5)
 def cf_ab(axis1_angle, axis2_angle, axis3_angle, axis4_angle, axis5_angle, axis6_angle, speed = 1000):
 #"""
 #move robot motors to specified cartiesian coordinates fast
@@ -94,7 +96,7 @@ def cf_ab(axis1_angle, axis2_angle, axis3_angle, axis4_angle, axis5_angle, axis6
             f.write(cmd)
             f.close()
             x = 1
-    
+    time.sleep(5)
 def cl_ab(axis1_angle, axis2_angle, axis3_angle, axis4_angle, axis5_angle, axis6_angle, speed = 1000):
 #"""
 #move robot motors to specified cartiesian coordinates linear endefector will fallow line
@@ -125,10 +127,10 @@ def cl_ab(axis1_angle, axis2_angle, axis3_angle, axis4_angle, axis5_angle, axis6
             f.write(cmd)
             f.close()
             x = 1    
-    
+    time.sleep(5)
 def cf_r(axis1_angle = 0, axis2_angle = 0,axis3_angle = 0, axis4_angle = 0, axis5_angle = 0, axis6_angle = 0, speed = 1000):
 #"""
-#cartiesian fast move relatvie to current position
+#cartiesian fast move relative to current position
 #"""
     cmd = "M20 G91 G0 X" + str(axis1_angle) + " Y" + str(axis2_angle) + " Z" + str(axis3_angle) + " A" + str(axis4_angle) \
     + " B" + str(axis5_angle) + " C" + str(axis6_angle) + " F" + str(speed) + "\n"
@@ -142,10 +144,10 @@ def cf_r(axis1_angle = 0, axis2_angle = 0,axis3_angle = 0, axis4_angle = 0, axis
             f.write(cmd)
             f.close()
             x = 1
-            
+    time.sleep(5)        
 def cl_r(axis1_angle = 0, axis2_angle = 0,axis3_angle = 0, axis4_angle = 0, axis5_angle = 0, axis6_angle = 0, speed = 1000):
 #"""
-#cartiesian leniear move relatvie to current position
+#cartiesian leniear move relative to current position
 #"""
     cmd = "M20 G91 G1 X" + str(axis1_angle) + " Y" + str(axis2_angle) + " Z" + str(axis3_angle) + " A" + str(axis4_angle) \
     + " B" + str(axis5_angle) + " C" + str(axis6_angle) + " F" + str(speed) + "\n"
@@ -159,7 +161,7 @@ def cl_r(axis1_angle = 0, axis2_angle = 0,axis3_angle = 0, axis4_angle = 0, axis
             f.write(cmd)
             f.close()
             x = 1
-    
+    time.sleep(5)
 def homing_sync():
 #"""
 #return homing command all motors home simaltaiously 
@@ -177,6 +179,7 @@ def homing_sync():
             f.write(cmd)
             f.close()
             x = 1
+    time.sleep(20)
 
 def homing_indiv():
 #"""
@@ -195,7 +198,7 @@ def homing_indiv():
             f.write(cmd)
             f.close()
             x = 1
-
+    time.sleep(20)
 def pump(on):
 #"""
 #returns comand to turn pump on or off
@@ -214,7 +217,7 @@ def pump(on):
             f.write(cmd)
             f.close()
             x = 1    
-
+    time.sleep(0.5)
 def grip(on):
 #"""
 #returns command to turn gripper on or off
@@ -233,17 +236,17 @@ def grip(on):
             f.write(cmd)
             f.close()
             x = 1
-            
+    time.sleep(0.5)        
 def get_data():
 
 #"""
 #returns various data from mirobot as a tuple
 
 #return values:
-#0,     1,     2,       3,       4,               5,       6,       7,
+#0,     1,     2,       3,       4,          5,       6,       7,     8,
 #error, state, a_angle, b_angle, c_angle,d_angle, x_angle, y_angle, z_angle,
 
-#8,      9,      10,     11,      12,      13,      14,   15,   16
+#9,      10,     11,      12,      13,      14,      15,   16,   17
 #x_cart, y_cart, z_cart, rx_cart, ry_cart, rz_cart, pump, grip, m_mode
 #""" 
     df = open("response_mirobot.txt","r")
@@ -411,10 +414,12 @@ def get_data():
             f = open("response_mirobot.txt", "r+")
             f.truncate()
             f.close()
+            time.sleep(2)
             return 0, state, a_angle, b_angle, c_angle,d_angle, x_angle, y_angle, z_angle,\
             x_cart, y_cart, z_cart, rx_cart, ry_cart, rz_cart, pump, grip, m_mode 
             
         else:
             current = current - 1
             if current  < 1:
+                time.sleep(2)
                 return 1,
