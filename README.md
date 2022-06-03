@@ -1,5 +1,5 @@
 # wlkata_mirobot_driver
-This is a python code that interfaces with wlkata mirobot and text files. The purpose of this code is to act an driver that will allow users to write your own api for the wlkata mirobot 6axis robot arm, in any langauge that can read and write to text files.  
+This is a python code that interfaces with wlkata mirobot and text files. The purpose of this code is to act an driver that will allow users to write your own api for the wlkata mirobot 6axis robot arm, in any langauge that can read and write to text files. This driver accounts for the firmware bug where the mirobot sends 2 acks instead of one.
 
 To use: git clone this repo,
 ./mirobotdriver.py
